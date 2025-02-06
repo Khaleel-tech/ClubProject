@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .css-selector {
+            background: linear-gradient(135deg, #ffffff 0%, #e8f0ff 100%);
+            background-size: 400% 400%;
+            animation: animate 16s ease infinite;
+        }
+
+        @keyframes animate {
+            0% { background-position: 39% 0%; }
+            50% { background-position: 62% 100%; }
+            100% { background-position: 39% 0%; }
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #e8f0ff 100%);
+            color: #1e3c72;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: clamp(20px, 5vw, 40px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            width: 100%;
+            max-width: 400px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.15);
+        }
+
+        h2 {
+            font-weight: bold;
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: clamp(20px, 4vw, 30px);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: clamp(15px, 3vw, 25px);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #1e3c72;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 42px;
+            color: #1e3c72;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: clamp(10px, 2vw, 12px) 15px clamp(10px, 2vw, 12px) 45px;
+            background: #ffffff;
+            color: #1e3c72;
+            border: 2px solid rgba(30, 60, 114, 0.1);
+            border-radius: 10px;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 15px rgba(30, 60, 114, 0.1);
+        }
+
+        .btn-primary {
+            background: #1e3c72;
+            color: #ffffff;
+            border: none;
+            padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 25px);
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: #2a5298;
+            transform: translateY(-2px);
+        }
+
+        .forgot-password {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #1e3c72;
+            text-decoration: none;
+            margin: clamp(15px, 3vw, 20px) 0;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            transition: all 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: #2a5298;
+        }
+
+        .alert-danger {
+            background: #fff5f5;
+            border: 1px solid #ffebeb;
+            color: #dc3545;
+            padding: clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 15px);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: clamp(15px, 3vw, 20px);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        .alert-success {
+            background: #f0fff4;
+            border: 1px solid #ebffeb;
+            color: #28a745;
+            padding: clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 15px);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: clamp(15px, 3vw, 20px);
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* Floating icons styling */
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            color: rgba(30, 60, 114, 0.1);
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .floating-icon:nth-child(1) { top: 15%; left: 10%; }
+        .floating-icon:nth-child(2) { top: 25%; right: 15%; }
+        .floating-icon:nth-child(3) { bottom: 20%; left: 15%; }
+        .floating-icon:nth-child(4) { bottom: 25%; right: 10%; }
+
+        /* User icon at the top */
+        .user-icon {
+            font-size: clamp(3rem, 6vw, 4rem);
+            color: #1e3c72;
+            margin-bottom: clamp(15px, 3vw, 20px);
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* Additional responsive adjustments */
+        @media (max-width: 360px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .form-group i {
+                top: 38px;
+            }
+
+            .floating-icons {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                transform: scale(1);
+                transition: transform 0.3s ease;
+            }
+
+            .container:hover {
+                transform: scale(1.02);
+            }
+        }
+    </style>
+</head>
+<body class="css-selector">
+    <div class="container">
+        <div class="floating-icons">
+            <i class="floating-icon fas fa-code"></i>
+            <i class="floating-icon fas fa-laptop-code"></i>
+            <i class="floating-icon fas fa-terminal"></i>
+            <i class="floating-icon fas fa-shield-alt"></i>
+        </div>
+
+        <div class="user-icon">
+            <i class="fas fa-user-circle"></i>
+        </div>
+        
+        <h2>Login</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Username</label>
+                <i class="fas fa-user"></i>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label for="id_password">Password</label>
+                <i class="fas fa-lock"></i>
+                {{ form.password }}
+            </div>
+
+            <a href="#" class="forgot-password">
+                <i class="fas fa-key"></i>
+                Forgot Password?
+            </a>
+
+            <button type="submit" class="btn btn-primary w-100">
+                <i class="fas fa-sign-in-alt"></i>
+                Login
+            </button>
+        </form>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{% if message.tags %}{{ message.tags }}{% else %}danger{% endif %}">
+                    <i class="fas fa-{% if message.tags == 'success' %}check-circle{% else %}exclamation-circle{% endif %}"></i>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+</html>
